@@ -1,0 +1,718 @@
+
+    <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josellino Usmany - Personal Portfolio</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           1. COLOR PALETTE & VARIABLES
+        /* ==========================================================================
+           2. GENERAL & TYPOGRAPHY
+           ========================================================================== */
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--base-color);
+            color: var(--primary-color);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Canvas Animation */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .text-accent {
+            color: var(--accent-color) !important;
+        }
+
+        .text-secondary-custom {
+            color: var(--secondary-color) !important;
+        }
+
+        .bg-base-dark {
+            background-color: var(--base-dark-glow);
+        }
+
+        /* Section Title Styling */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2.5rem;
+            font-weight: 800;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), transparent);
+            bottom: -8px;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--base-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
+
+        /* ==========================================================================
+           3. NAVBAR STYLING
+           ========================================================================== */
+        .navbar-custom {
+            background-color: rgba(10, 41, 71, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(211, 212, 192, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            color: var(--primary-color) !important;
+            letter-spacing: 0.5px;
+        }
+
+        .navbar-brand span {
+            color: var(--accent-color);
+        }
+
+        .nav-link {
+            color: var(--secondary-color) !important;
+            font-weight: 600;
+            margin: 0 5px;
+            padding: 8px 16px !important;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color) !important;
+            background-color: rgba(139, 94, 60, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           4. HERO SECTION
+           ========================================================================== */
+        .hero-section {
+            min-height: 100vh;
+            padding-top: 100px;
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-img-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-img {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--secondary-color);
+            box-shadow: 0 0 35px rgba(139, 94, 60, 0.35);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .profile-img-container:hover .profile-img {
+            transform: scale(1.05) rotate(2deg);
+            border-color: var(--accent-color);
+        }
+
+        .hero-badge {
+            background-color: rgba(211, 212, 192, 0.15);
+            color: var(--primary-color);
+            border: 1px solid var(--secondary-color);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        /* ==========================================================================
+           5. BUTTONS & HOVER EFFECTS
+           ========================================================================== */
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 30px;
+            border: 2px solid var(--accent-color);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(139, 94, 60, 0.3);
+        }
+
+        .btn-accent:hover {
+            background-color: var(--accent-hover);
+            border-color: var(--accent-hover);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(139, 94, 60, 0.5);
+        }
+
+        .btn-outline-custom {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--secondary-color);
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-custom:hover {
+            background-color: var(--secondary-color);
+            color: var(--base-color);
+            transform: translateY(-3px);
+        }
+
+        /* ==========================================================================
+           6. CARDS & SECTIONS
+           ========================================================================== */
+        .custom-card {
+            background-color: rgba(10, 41, 71, 0.6);
+            border: 1px solid rgba(211, 212, 192, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            height: 100%;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .custom-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-color);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        /* Hobi Cards */
+        .hobby-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(139, 94, 60, 0.2);
+            color: var(--primary-color);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .custom-card:hover .hobby-icon {
+            background-color: var(--accent-color);
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        /* Gaming Badge Section (Prestasi) */
+        .gaming-card {
+            background: linear-gradient(135deg, rgba(10, 41, 71, 0.9), rgba(139, 94, 60, 0.3));
+            border: 2px solid var(--accent-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gaming-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(243, 228, 201, 0.1) 0%, transparent 70%);
+            animation: rotateGlow 10s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .gusion-badge {
+            font-size: 4rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 20px rgba(243, 228, 201, 0.6);
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        /* Portfolio Card */
+        .portfolio-preview {
+            background-color: var(--base-dark-glow);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(211, 212, 192, 0.1);
+        }
+
+        .task-item {
+            background-color: rgba(211, 212, 192, 0.08);
+            border-left: 4px solid var(--accent-color);
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Form Input */
+        .form-control-custom {
+            background-color: rgba(5, 24, 43, 0.7);
+            border: 1px solid rgba(211, 212, 192, 0.3);
+            color: var(--primary-color);
+            border-radius: 12px;
+            padding: 12px 18px;
+        }
+
+        .form-control-custom:focus {
+            background-color: rgba(5, 24, 43, 0.9);
+            border-color: var(--accent-color);
+            color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(139, 94, 60, 0.3);
+        }
+
+        .form-control-custom::placeholder {
+            color: rgba(211, 212, 192, 0.5);
+        }
+
+        /* Toast notification */
+        .copy-toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 12px 24px;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 9999;
+        }
+
+        .copy-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(211, 212, 192, 0.15);
+            padding: 30px 0;
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ANIMATED BACKGROUND CANVAS -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fa-solid me-2 text-accent"></i>USMANY<span>.J</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#hobi">Hobi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#prestasi">Prestasi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portofolio">Portofolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SECTION 1: HOME (HERO) -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center flex-column-reverse flex-lg-row">
+                <div class="col-lg-7 mt-4 mt-lg-0">
+                    <div class="hero-badge">
+                        <i class="fa-solid fa-code me-2"></i>Welcome to My World
+                    </div>
+                    <h1 class="display-3 fw-bold mb-3">Halo, Saya <br><span class="text-accent">Josellino Usmany</span></h1>
+                    <p class="lead text-secondary-custom mb-4" style="max-width: 600px;">
+                        Seorang pengembang bersemangat dan pemain kompetitif. Selamat datang di portofolio interaktif saya tempat hobi, karya, dan pencapaian bertemu.
+                    </p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="#portofolio" class="btn btn-accent">
+                            <i class="fa-solid fa-briefcase me-2"></i>Lihat Karya
+                        </a>
+                        <a href="#contact" class="btn btn-outline-custom">
+                            <i class="fa-solid fa-paper-plane me-2"></i>Hubungi Saya
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-5 text-center">
+                    <div class="profile-img-container">
+                        <!-- Placeholder Avatar Avatar Profile -->
+                        <img src="profil.jpg" alt="Foto Profil Usmany Josellino" class="profile-img img-fluid"
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: HOBI -->
+    <section id="hobi" class="py-5 my-5">
+        <div class="container">
+            <h2 class="section-title">Hobi & Minat</h2>
+            <p class="text-secondary-custom mb-5">Aktivitas yang menjaga kreativitas dan energi saya tetap tinggi.</p>
+            
+            <div class="row g-4">
+                <!-- Music Card -->
+                <div class="col-md-6">
+                    <div class="custom-card">
+                        <div class="hobby-icon">
+                            <i class="fa-solid fa-headphones"></i>
+                        </div>
+                        <h3 class="h4 mb-3">Dengerin Lagu</h3>
+                        <p class="text-secondary-custom">
+                            Musik adalah sumber inspirasi harian saya. Dari genre Lo-Fi saat coding hingga lagu dengan beat tinggi untuk menjaga fokus dan semangat kerja.
+                        </p>
+                        <div class="mt-4 d-flex align-items-center text-accent fs-6 fw-semibold">
+                            <i class="fa-solid fa-circle-play me-2"></i> Daily Companion
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Basketball Card -->
+                <div class="col-md-6">
+                    <div class="custom-card">
+                        <div class="hobby-icon">
+                            <i class="fa-solid fa-basketball"></i>
+                        </div>
+                        <h3 class="h4 mb-3">Main Basket</h3>
+                        <p class="text-secondary-custom">
+                            Olahraga tim yang melatih fisik, kecepatan, serta strategi. Bola basket mengajarkan pentingnya kerja sama tim dan respons cepat di bawah tekanan.
+                        </p>
+                        <div class="mt-4 d-flex align-items-center text-accent fs-6 fw-semibold">
+                            <i class="fa-solid fa-trophy me-2"></i> Team Player
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: PRESTASI -->
+    <section id="prestasi" class="py-5 my-5">
+        <div class="container">
+            <h2 class="section-title">Prestasi Utamaku</h2>
+            <p class="text-secondary-custom mb-5">Pencapaian dalam dunia esport & kompetisi game.</p>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="custom-card gaming-card p-4 p-md-5">
+                        <div class="row align-items-center position-relative" style="z-index: 2;">
+                            <div class="col-md-4 text-center mb-4 mb-md-0">
+                                <div class="gusion-badge">
+                                    <i class="fa-solid fa-crown"></i>
+                                </div>
+                                <span class="badge bg-warning text-dark px-3 py-2 mt-2 rounded-pill fw-bold">Mobile Legends</span>
+                            </div>
+                            <div class="col-md-8">
+                                <span class="text-accent fw-bold text-uppercase tracking-wider">Pencapaian Tertinggi</span>
+                                <h3 class="display-6 fw-bold my-2">Top 1 Player Gusion</h3>
+                                <p class="text-secondary-custom">
+                                    Berhasil mencapai peringkat teratas sebagai pengguna hero **Gusion** di Mobile Legends. Pencapaian ini diraih melalui latihan disiplin, mekanisme eksekusi cepat, dan penguasaan strategi mikro-makro yang matang.
+                                </p>
+                                <div class="d-flex gap-2 flex-wrap mt-3">
+                                    <span class="badge bg-dark text-secondary-custom border border-secondary">Fast Hand</span>
+                                    <span class="badge bg-dark text-secondary-custom border border-secondary">Assassin Specialist</span>
+                                    <span class="badge bg-dark text-secondary-custom border border-secondary">Competitive Player</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: PORTOFOLIO -->
+    <section id="portofolio" class="py-5 my-5">
+        <div class="container">
+            <h2 class="section-title">Portofolio</h2>
+            <p class="text-secondary-custom mb-5">Proyek perangkat lunak yang telah saya kembangkan.</p>
+
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="custom-card">
+                        <div class="portfolio-preview mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="fw-bold fs-6 text-accent"><i class="fa-solid fa-list-check me-2"></i>To-Do List App</span>
+                                <span class="badge bg-success">Active Project</span>
+                            </div>
+                            <!-- App Mockup Preview -->
+                            <div class="task-item d-flex justify-content-between align-items-center">
+                                <span><i class="fa-regular fa-square-check me-2 text-accent"></i> Selesaikan Desain Landing Page</span>
+                                <small class="text-muted">Done</small>
+                            </div>
+                            <div class="task-item d-flex justify-content-between align-items-center">
+                                <span><i class="fa-regular fa-square me-2"></i> Belajar Framework Baru</span>
+                                <small class="text-muted">In Progress</small>
+                            </div>
+                            <div class="task-item d-flex justify-content-between align-items-center">
+                                <span><i class="fa-regular fa-square me-2"></i> Latihan Basket Sore</span>
+                                <small class="text-muted">Pending</small>
+                            </div>
+                        </div>
+
+                        <h3 class="h4 mb-2">Aplikasi To-Do-List</h3>
+                        <p class="text-secondary-custom mb-4">
+                            Aplikasi manajemen tugas harian yang intuitif dengan fitur penambahan tugas, kategori, pengingat, dan penyimpanan lokal untuk efisiensi produktivitas.
+                        </p>
+                        
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="badge bg-dark text-secondary-custom border border-secondary me-1">HTML/CSS</span>
+                                <span class="badge bg-dark text-secondary-custom border border-secondary me-1">JavaScript</span>
+                                <span class="badge bg-dark text-secondary-custom border border-secondary">Bootstrap</span>
+                            </div>
+                            <a href="#contact" class="btn btn-sm btn-accent">Demo App <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Placeholder for future project -->
+                <div class="col-lg-6">
+                    <div class="custom-card d-flex flex-column justify-content-center text-center p-5 border-dashed">
+                        <div class="mb-3 fs-1 text-secondary-custom opacity-50">
+                            <i class="fa-solid fa-diagram-project"></i>
+                        </div>
+                        <h4 class="text-secondary-custom">Proyek Mendatang</h4>
+                        <p class="text-secondary-custom small mb-0">Sedang dalam tahap pengembangan ide & arsitektur.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: CONTACT -->
+    <section id="contact" class="py-5 my-5">
+        <div class="container">
+            <h2 class="section-title">Hubungi Saya</h2>
+            <p class="text-secondary-custom mb-5">Tertarik untuk berkolaborasi atau sekadar menyapa? Kirimkan pesan!</p>
+
+            <div class="row g-4">
+                <div class="col-lg-5">
+                    <div class="custom-card">
+                        <h3 class="h4 mb-4">Informasi Kontak</h3>
+                        
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="hobby-icon me-3 mb-0" style="width: 50px; height: 50px; font-size: 1.2rem;">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <small class="text-secondary-custom d-block">Email Resmi</small>
+                                <span class="fw-bold fs-6">usmanyjosellino@gmail.com</span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2 mb-4">
+                            <a href="mailto:usmanyjosellino@gmail.com" class="btn btn-accent w-100 text-center">
+                                <i class="fa-solid fa-paper-plane me-2"></i>Kirim Email
+                            </a>
+                            <button onclick="copyEmail()" class="btn btn-outline-custom" title="Salin Email">
+                                <i class="fa-solid fa-copy"></i>
+                            </button>
+                        </div>
+
+                        <hr class="border-secondary my-4">
+
+                        <h5 class="h6 mb-3">Sosial Media</h5>
+                        <div class="d-flex gap-3">
+                            <a href="#" class="btn btn-outline-custom rounded-circle p-2" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" class="btn btn-outline-custom rounded-circle p-2" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;"><i class="fa-brands fa-github"></i></a>
+                            <a href="#" class="btn btn-outline-custom rounded-circle p-2" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;"><i class="fa-brands fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7">
+                    <div class="custom-card">
+                        <h3 class="h4 mb-4">Tinggalkan Pesan</h3>
+                        <form onsubmit="event.preventDefault(); alert('Pesan berhasil terkirim! (Simulasi)');">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label text-secondary-custom">Nama Anda</label>
+                                    <input type="text" class="form-control form-control-custom" placeholder="Masukkan nama" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-secondary-custom">Email Anda</label>
+                                    <input type="email" class="form-control form-control-custom" placeholder="nama@email.com" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label text-secondary-custom">Subjek</label>
+                                    <input type="text" class="form-control form-control-custom" placeholder="Subjek pesan" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label text-secondary-custom">Pesan</label>
+                                    <textarea class="form-control form-control-custom" rows="4" placeholder="Tuliskan pesan Anda di sini..." required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-accent w-100">Kirim Pesan Sekarang</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="text-center text-secondary-custom">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 Usmany Josellino. Designed with Bootstrap 5 & Custom CSS.</p>
+        </div>
+    </footer>
+
+    <!-- TOAST NOTIFICATION FOR EMAIL COPY -->
+    <div id="toast" class="copy-toast">
+        <i class="fa-solid fa-check-circle me-2"></i> Email berhasil disalin ke clipboard!
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- INTERACTIVE BACKGROUND PARTICLES & SCRIPT -->
+    <script>
+        // Copy Email Functionality
+        function copyEmail() {
+            const email = "usmanyjosellino@gmail.com";
+            
+            // Clipboard copy fallbacks
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(email);
+            } else {
+                const dummy = document.createElement('input');
+                document.body.appendChild(dummy);
+                dummy.value = email;
+                dummy.select();
+                document.execCommand('copy');
+                document.body.removeChild(dummy);
+            }
+
+            // Show Toast Notification
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Particle Canvas Animation
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let particlesArray = [];
+        const numberOfParticles = 45;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.color = '#F3E4C9';
+                this.opacity = Math.random() * 0.3 + 0.1;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                else if (this.x < 0) this.x = canvas.width;
+
+                if (this.y > canvas.height) this.y = 0;
+                else if (this.y < 0) this.y = canvas.height;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.onload = function() {
+            initParticles();
+            animateParticles();
+        };
+    </script>
+</body>
+</html>
